@@ -15,11 +15,10 @@ article](http://www.devthought.com/2011/12/22/a-string-is-not-an-error/#beyond).
 require('console-trace')
 ```
 
-You can add the `t` or `trace` getter to your calls to obtain a stacktrace:
+You can add the `t` getter to your calls to obtain a stacktrace:
 
 ```js
 console.t.log('a');
-console.trace.log('aaa');
 ```
 
 You can also make every console call trace:
