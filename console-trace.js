@@ -52,4 +52,4 @@ function getter () {
 }
 
 console.__defineGetter__('t', getter);
-console.__defineGetter__('trace', getter);
+console.__defineGetter__('traced', getter);
