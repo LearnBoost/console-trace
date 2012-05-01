@@ -30,7 +30,7 @@ console.log(' regular console.log, no clue where it came from');
 process.stdout.write(' ');
 
 // change alignment
-console.traceOptions.traceRight = true;
+console.traceOptions.right = true;
 
 console.trace.log('this is a traced console.log');
 
@@ -43,11 +43,11 @@ console.log(' regular console.log, no clue where it came from');
 process.stdout.write(' ');
 
 // change alignment
-console.traceOptions.traceAlways = true;
-console.traceOptions.traceColors = false;
+console.traceOptions.always = true;
+console.traceOptions.colors = false;
 
 console.error('this is a traced console.log');
 
-console.traceOptions.traceAlways = false;
+console.traceOptions.always = false;
 // pad
 console.log('');

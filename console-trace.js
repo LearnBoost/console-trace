@@ -28,8 +28,8 @@ module.exports = function (options) {
 ;['error', 'log', 'info', 'warn'].forEach(function (name) {
   var fn = console[name];
   console[name] = function () {
-    if (console._trace || console.traceOptions.traceAlways) {
-      var pad = (arguments[0] && !console.traceOptions.traceRight ? ' ' : '');
+    if (console._trace || console.traceOptions.always) {
+      var pad = (arguments[0] && !console.traceOptions.right ? ' ' : '');
       arguments[0] =  console.traceFormat(__stack[1], name) + pad + arguments[0];
     }
     console._trace = false;
@@ -49,8 +49,8 @@ console.traceFormat = function (call, method) {
   var basename = call.getFileName().replace(process.cwd() + '/', '')
     , str = '[' + basename + ':' + call.getLineNumber() + ']'
 
-  if (false === console.traceOptions.traceColors || tty.isatty()) {
-    if (console.traceOptions.traceRight) {
+  if (false === console.traceOptions.colors || tty.isatty()) {
+    if (console.traceOptions.right) {
       var rowWidth = process.stdout.getWindowSize()[0];
       return '\033[s' + // save current position
              '\033[' + rowWidth + 'D' + // move to the start of the line
