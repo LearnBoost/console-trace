@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -33,7 +34,7 @@ module.exports = function (options) {
   var fn = console[name];
   console[name] = function () {
     if(typeof arguments[0] === 'object') {
-      arguments[0] = JSON.stringify(arguments[0]);
+      arguments[0] = JSON.stringify(arguments[0], null, ' ');
     }
     if (console._trace || console.traceAlways) {
       arguments[0] = console.traceFormat(__stack[1], name) + arguments[0];
