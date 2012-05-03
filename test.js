@@ -32,7 +32,7 @@ process.stdout.write(' ');
 // change alignment
 console.traceOptions.right = true;
 
-console.trace.log('this is a traced console.log');
+console.traced.log('this is a traced console.log');
 
 // visual pad
 console.log('');
