@@ -29,8 +29,15 @@ var callsite = require('callsite')
  * @api public
  */
 
+function getBasename(call) {
+	var fileName = call.getFileName(),
+		basename = fileName.toLowerCase().replace(process.cwd().toLowerCase() + '/', '');
+	
+	return fileName.slice(-basename.length);
+}
+
 console.traceFormat = function (call, method) {
-  var basename = call.getFileName().replace(process.cwd() + '/', '')
+  var basename = getBasename(call)
     , str = '[' + basename + ':' + call.getLineNumber() + '] '
 
   if (false === console.traceColors || tty.isatty()) {
