@@ -6,7 +6,7 @@ with the [CallSite](http://github.com/visionmedia/callsite) information.
 To read more about runtime stack trace introspection you can refer to [this
 article](http://www.devthought.com/2011/12/22/a-string-is-not-an-error/#beyond).
 
-![](http://f.cl.ly/items/063g0m1g1x3c1Z033C28/console-trace.png)
+![](http://f.cl.ly/items/1T2K0H0i2H2J0C3q3H2u/console-trace.png)
 
 ## Installation
 
@@ -21,6 +21,7 @@ require('console-trace')([options])
 ### Available Options:
 
 * __always__ - (`Boolean`: defaults to false) always print the callsite info even without accessing methods from the `t` or `traced` getters.
+* __cwd__ - (`String`: defaults to `process.cwd()`) the path that will be stripped from the callsite info
 * __color__ - (`Boolean`: defaults to true) terminal colors support flag
 * __right__ - (`Boolean`: defaults to false) callsite alignment flag, when true prints infos on the right
 
