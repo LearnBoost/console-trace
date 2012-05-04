@@ -1,4 +1,3 @@
-
 require('./console-trace')
 
 // visual pad
@@ -49,5 +48,16 @@ console.traceOptions.colors = false;
 console.error('this is a traced console.log');
 
 console.traceOptions.always = false;
+
+// visual pad
+console.log('');
+
+// visual pad
+process.stdout.write(' ');
+
+console.traced.trace('this is a traced console.trace')
+
+console.traceOptions.always = false;
+
 // pad
 console.log('');

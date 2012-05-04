@@ -25,7 +25,7 @@ module.exports = function (options) {
  * Overrides the console methods.
  */
 
-;['error', 'log', 'info', 'warn'].forEach(function (name) {
+;['error', 'log', 'info', 'warn', 'trace'].forEach(function (name) {
   var fn = console[name];
   console[name] = function () {
     if (console._trace || console.traceOptions.always) {
