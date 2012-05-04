@@ -1,4 +1,5 @@
 require('./console-trace')
+require('./console-trace')() // should work even if I require it twice
 
 // visual pad
 console.log('');
