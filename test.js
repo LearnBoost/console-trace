@@ -1,64 +1,62 @@
 require('./console-trace')
 require('./console-trace')() // should work even if I require it twice
 
-// visual pad
-console.log('');
+process.stdout.write('\n');
 
-console.error(' regular console.error, no clue where it came from');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console[name]('regular console.%s, no clue where it came from', name);
+});
 
-// visual pad
-process.stdout.write(' ');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-console.traced.error('this is a traced console.error');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is a traced console.%s', name);
+});
 
-// visual pad
-console.log('');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-console.log(' regular console.log, no clue where it came from');
+console.traceOptions.colors = false;
 
-// visual pad
-process.stdout.write(' ');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is an uncolored traced console.%s', name);
+});
 
-console.traced.log('this is a traced console.log');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-// visual pad
-console.log('');
-
-console.log(' regular console.log, no clue where it came from');
-
-// visual pad
-process.stdout.write(' ');
-
-// change alignment
 console.traceOptions.right = true;
+console.traceOptions.colors = true;
 
-console.traced.log('this is a traced console.log');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is a colored right aligned traced console.%s', name);
+});
 
-// visual pad
-console.log('');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-console.log(' regular console.log, no clue where it came from');
-
-// visual pad
-process.stdout.write(' ');
-
-// change alignment
 console.traceOptions.always = true;
 console.traceOptions.colors = false;
 
-console.error('this is a traced console.log');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console[name]('this is an uncolored right aligned traced console.%s', name);
+});
 
-console.traceOptions.always = false;
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-// visual pad
-console.log('');
+require('./console-trace')({
+  colors: {
+    log: '35',
+    warn: '35',
+    error: '35',
+    trace: '35',
+    info: '35'
+  }
+})
 
-// visual pad
-process.stdout.write(' ');
-
-console.traced.trace('this is a traced console.trace')
-
-console.traceOptions.always = false;
-
-// pad
-console.log('');
+;['error', 'log', 'info', 'warn', 'trace'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is a magenta traced console.' + name);
+});
