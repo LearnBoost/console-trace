@@ -22,7 +22,7 @@ require('console-trace')([options])
 
 * __always__ - (`Boolean`: defaults to false) always print the callsite info even without accessing methods from the `t` or `traced` getters.
 * __cwd__ - (`String`: defaults to `process.cwd()`) the path that will be stripped from the callsite info
-* __color__ - (`Boolean`: defaults to true) terminal colors support flag
+* __colors__ - (`Boolean|Object`: defaults to true) terminal colors support flag or a custom color object
 * __right__ - (`Boolean`: defaults to false) callsite alignment flag, when true prints infos on the right
 
 ### Examples:
@@ -63,6 +63,23 @@ require('console-trace')({
 
 console.log('a');     // tracing right
 console.error('a');   // tracing right
+```
+
+You can change defaults colors too
+
+```javascript
+require('./console-trace')({
+  always: true,
+  colors: {
+    warn: '35',
+    info: '32'
+  }
+})
+
+...
+
+console.warn('a');    // magenta
+console.info('a');    // green
 ```
 
 To customize the string that's prefixed to the calls, override the

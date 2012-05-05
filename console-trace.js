@@ -4,7 +4,9 @@
  */
 
 var callsite = require('callsite')
-  , isatty = require('tty').isatty()
+  , tty = require('tty')
+  , isatty = Boolean(tty.isatty() && process.stdout.getWindowSize)
+  , defaultColors = { log: '90', error: '91', warn: '93', info: '96' }
 
 console.traceOptions = Object.create(null);
 console.traceOptions.cwd = process.cwd() + '/';
@@ -32,7 +34,7 @@ module.exports = function (options) {
   var fn = console[name];
   console[name] = function () {
     if (console._trace || console.traceOptions.always) {
-      var pad = (arguments[0] && !console.traceOptions.right || !console.traceOptions.colors || !isatty ? ' ' : '');
+      var pad = (arguments[0] && !console.traceOptions.right || !isatty ? ' ' : '');
       arguments[0] =  console.traceFormat(__stack[1], name) + pad + arguments[0];
     }
     console._trace = false;
@@ -51,19 +53,25 @@ module.exports = function (options) {
 console.traceFormat = function (call, method) {
   var basename = call.getFileName().replace(console.traceOptions.cwd, '')
     , str = '[' + basename + ':' + call.getLineNumber() + ']'
+    , color = '99'
 
-  if (!console.traceOptions.colors || !isatty) {
+  if (!isatty) {
     return str;
   }
+
+  if (console.traceOptions.colors !== false) {
+    color = console.traceOptions.colors === true ? defaultColors[method] : console.traceOptions.colors[method];
+  }
+
   if (console.traceOptions.right) {
     var rowWidth = process.stdout.getWindowSize()[0];
     return '\033[s' + // save current position
            '\033[' + rowWidth + 'D' + // move to the start of the line
            '\033[' + (rowWidth - str.length) + 'C' + // align right
-           '\033[' + ('error' == method ? '91' : '90') + 'm' + str + '\033[39m' +
+           '\033[' + color + 'm' + str + '\033[39m' +
            '\033[u'; // restore current position
   } else {
-    return '\033[' + ('error' == method ? '91' : '90') + 'm' + str + '\033[39m';
+    return '\033[' + color + 'm' + str + '\033[39m';
   }
 }
 
