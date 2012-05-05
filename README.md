@@ -1,4 +1,3 @@
-
 # console-trace
 
 Extends the native Node.JS `console` object to prefix logging functions
@@ -7,31 +6,80 @@ with the [CallSite](http://github.com/visionmedia/callsite) information.
 To read more about runtime stack trace introspection you can refer to [this
 article](http://www.devthought.com/2011/12/22/a-string-is-not-an-error/#beyond).
 
-![](http://f.cl.ly/items/0r3t3i0P0D1w2K242p1U/Image%202012.03.26%2011:42:35%20AM.png)
+![](http://f.cl.ly/items/1T2K0H0i2H2J0C3q3H2u/console-trace.png)
 
-## How to use
+## Installation
 
-```js
+    $ npm install console-trace
+
+### Syntax:
+
+```javascript
+require('console-trace')([options])
+```
+
+### Available Options:
+
+* __always__ - (`Boolean`: defaults to false) always print the callsite info even without accessing methods from the `t` or `traced` getters.
+* __cwd__ - (`String`: defaults to `process.cwd()`) the path that will be stripped from the callsite info
+* __colors__ - (`Boolean|Object`: defaults to true) terminal colors support flag or a custom color object
+* __right__ - (`Boolean`: defaults to false) callsite alignment flag, when true prints infos on the right
+
+### Examples:
+
+```javascript
 require('console-trace')
 ```
 
 You can add the `t` or `traced` getter to your calls to obtain a stacktrace:
 
-```js
+```javascript
 console.t.log('a');
 console.traced.log('a');
 ```
 
 You can also make every console call trace:
 
-```js
-console.traceAlways = true;
+```javascript
+require('console-trace')({
+  always: true,
+})
+
+...
+
+console.log('a');     // tracing
+console.error('a');   // tracing
 ```
 
-To disable colors completely, set the following:
+You can align the callsite infos to the right
 
-```js
-console.traceColors = false;
+```javascript
+require('console-trace')({
+  always: true,
+  right: true
+})
+
+...
+
+console.log('a');     // tracing right
+console.error('a');   // tracing right
+```
+
+You can change defaults colors too
+
+```javascript
+require('./console-trace')({
+  always: true,
+  colors: {
+    warn: '35',
+    info: '32'
+  }
+})
+
+...
+
+console.warn('a');    // magenta
+console.info('a');    // green
 ```
 
 To customize the string that's prefixed to the calls, override the
@@ -41,6 +89,11 @@ To customize the string that's prefixed to the calls, override the
 
 If you have more sophisticated logging needs, or don't wish to extend
 `console`, I suggest you look at [tracer](https://github.com/baryon/tracer).
+
+## Credits
+
+  * [Guillermo Rauch](https://github.com/guille)
+  * [Kilian Ciuffolo](https://github.com/kilianc)
 
 ## License 
 
