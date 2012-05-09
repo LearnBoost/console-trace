@@ -94,6 +94,7 @@ If you have more sophisticated logging needs, or don't wish to extend
 
   * [Guillermo Rauch](https://github.com/guille)
   * [Kilian Ciuffolo](https://github.com/kilianc)
+  * [Nicholas Manousos](https://github.com/nmanousos)  
 
 ## License 
 

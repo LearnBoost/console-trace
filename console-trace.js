@@ -60,7 +60,11 @@ console.traceFormat = function (call, method) {
   }
 
   if (console.traceOptions.colors !== false) {
-    color = console.traceOptions.colors === true ? defaultColors[method] : console.traceOptions.colors[method];
+    if (console.traceOptions.colors === undefined || console.traceOptions.colors[method] === undefined) {
+      color = defaultColors[method];
+    } else {
+      color = console.traceOptions.colors[method];
+    }
   }
 
   if (console.traceOptions.right) {
