@@ -1,25 +1,62 @@
-
 require('./console-trace')
+require('./console-trace')({}) // should work even if I require it twice
 
-// visual pad
-console.log('');
+process.stdout.write('\n');
 
-console.error(' regular console.error, no clue where it came from');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console[name]('regular console.%s, no clue where it came from', name);
+});
 
-// visual pad
-process.stdout.write(' ');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-console.trace.error('this is a traced console.error');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is a traced console.%s', name);
+});
 
-// visual pad
-console.log('');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-console.log(' regular console.log, no clue where it came from');
+console.traceOptions.colors = false;
 
-// visual pad
-process.stdout.write(' ');
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is an uncolored traced console.%s', name);
+});
 
-console.trace.log('this is a traced console.log');
+process.stdout.write('\n---------------------------------------------------------\n\n');
 
-// pad
-console.log('');
+console.traceOptions.right = true;
+console.traceOptions.colors = true;
+
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is a colored right aligned traced console.%s', name);
+});
+
+process.stdout.write('\n---------------------------------------------------------\n\n');
+
+console.traceOptions.always = true;
+console.traceOptions.colors = false;
+
+;['error', 'log', 'info', 'warn'].forEach(function (name) {
+  process.stdout.write(' ');
+  console[name]('this is an uncolored right aligned traced console.%s', name);
+});
+
+process.stdout.write('\n---------------------------------------------------------\n\n');
+
+require('./console-trace')({
+  colors: {
+    log: '35',
+    warn: '35',
+    error: '35',
+    trace: '35',
+    info: '35'
+  }
+})
+
+;['error', 'log', 'info', 'warn', 'trace'].forEach(function (name) {
+  process.stdout.write(' ');
+  console.traced[name]('this is a magenta traced console.' + name);
+});
