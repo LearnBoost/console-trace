@@ -60,3 +60,16 @@ require('./console-trace')({
   process.stdout.write(' ');
   console.traced[name]('this is a magenta traced console.' + name);
 });
+
+process.stdout.write('\n---------------------------------------------------------\n\n');
+
+console.traceOptions.colors = true;
+
+process.stdout.write(' ');
+console.traced.log({ 1: 'works', 2: 'with', 3: 'Object' });
+
+process.stdout.write(' ');
+console.traced.log(['Works', 'with', 'Array']);
+
+process.stdout.write(' ');
+console.traced.log('Works with Buffer', Buffer('FooBar'));

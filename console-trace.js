@@ -33,11 +33,14 @@ module.exports = function (options) {
 ;['error', 'log', 'info', 'warn', 'trace'].forEach(function (name) {
   var fn = console[name];
   console[name] = function () {
-    if (console._trace || console.traceAlways) {
-			if(typeof arguments[0] === 'object') {
-				arguments[0] = JSON.stringify(arguments[0], null, ' ');
-			}
-      arguments[0] = console.traceFormat(__stack[1], name) + arguments[0];
+    if (console._trace || console.traceOptions.always) {
+      if (Buffer.isBuffer(arguments[0])) {
+        arguments[0] = arguments[0].inspect()
+      } else if (typeof arguments[0] === 'object') {
+        arguments[0] = JSON.stringify(arguments[0], null, '  ');
+      }
+      var pad = (arguments[0] && !console.traceOptions.right || !isatty ? ' ' : '');
+      arguments[0] = console.traceFormat(__stack[1], name) + pad + arguments[0];
     }
     console._trace = false;
     return fn.apply(this, arguments);
