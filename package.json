@@ -1,6 +1,6 @@
 {
     "name": "console-trace"
-  , "version": "0.2.0"
+  , "version": "0.2.1"
   , "description": "Adds a handy `trace` flag to the console object to prepend the file and line number"
   , "main": "./console-trace"
   , "dependencies": {

@@ -1,4 +1,11 @@
 
+0.2.1 / 2012-07-06
+==================
+
+  * Added Buffer support [kilianc]
+  * Fixed missing default color for trace method [kilianc]
+  * Fixed missing padding [kilianc]
+
 0.2.0 / 2012-07-06
 ==================
 
