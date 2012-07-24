@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -95,5 +94,9 @@ function getter () {
   return this;
 }
 
-console.__defineGetter__('t', getter);
-console.__defineGetter__('traced', getter);
+Object.defineProperty(console, 't', {
+  get: getter
+});
+Object.defineProperty(console, 'traced', {
+  get: getter
+});
