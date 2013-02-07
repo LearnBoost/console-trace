@@ -4,6 +4,6 @@
   , "description": "Adds a handy `trace` flag to the console object to prepend the file and line number"
   , "main": "./console-trace"
   , "dependencies": {
-      "callsite": "*"
+      "callsite": "0.0.1"
     }
 }
