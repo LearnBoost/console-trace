@@ -9,7 +9,7 @@ var callsite = require('callsite')
   , defaultColors = { log: '90', error: '91', warn: '93', info: '96', trace: '90' }
 
 console.traceOptions = Object.create(null);
-console.traceOptions.cwd = process.cwd() + '/';
+console.traceOptions.cwd = process.cwd() + (process.platform === 'win32' ? '\\' : '/');
 console.traceOptions.colors = true;
 
 /**
