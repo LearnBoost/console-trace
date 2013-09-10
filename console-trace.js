@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -40,7 +39,8 @@ module.exports = function (options) {
         arguments[0] = JSON.stringify(arguments[0], null, '  ');
       }
       var pad = (arguments[0] && !console.traceOptions.right || !isatty ? ' ' : '');
-      arguments[0] = console.traceFormat(__stack[1], name) + pad + arguments[0];
+      var stack = (typeof __stack !== 'undefined') ? __stack : callsite();
+      arguments[0] = console.traceFormat(stack[1], name) + pad + arguments[0];
     }
     console._trace = false;
     return fn.apply(this, arguments);
