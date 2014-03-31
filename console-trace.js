@@ -40,7 +40,7 @@ module.exports = function (options) {
         arguments[0] = JSON.stringify(arguments[0], null, '  ');
       }
       var pad = (arguments[0] && !console.traceOptions.right || !isatty ? ' ' : '');
-      arguments[0] = console.traceFormat(__stack[1], name) + pad + arguments[0];
+      arguments[0] = console.traceFormat(callsite()[1], name) + pad + arguments[0];
     }
     console._trace = false;
     return fn.apply(this, arguments);
